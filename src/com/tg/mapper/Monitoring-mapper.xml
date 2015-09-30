@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tg.entity.Monitoring">
+    <!-- 插入操作 -->
+	<insert id="add" parameterType="monitoring">
+	  insert into monitoring(ECG) values(#{ecg}) 
+	</insert>
+	
+	<select id="getList" resultType="monitoring" parameterType="int">
+		select * from monitoring where u_id=#{u_id}
+	</select>
+	
+	<select id="findM_id" resultType="monitoring" parameterType="monitoring">
+		select * from monitoring order by m_id desc limit 1
+	</select>
+	
+	<!-- 删除操作 -->
+	<delete id="deleteOne" parameterType="int">
+		delete from monitoring where m_id=#{m_id}
+	</delete>
+	
+	<!-- 更新warning的值 -->
+	<update id="update" parameterType="monitoring" >
+		 update monitoring set warning=2 where m_id=#{m_id}
+	</update>
+	
+	<!-- 根据m_id更新值 -->
+	<update id="update1" parameterType="monitoring">
+		update monitoring set u_id=#{u_id},d_id=#{d_id},highpressure=#{highpressure},
+		lowpressure=#{lowpressure},temperature=#{temperature},pulse=#{pulse},
+		warning =#{warning},m_date=now() where m_id=#{m_id}
+	</update>
+</mapper>

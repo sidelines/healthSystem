@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tg.entity.Title">
+   	<!-- 用户查看发布记录 -->
+   	<select id="getListByValue" parameterType="title" resultType="title">
+   		select * from title where u_id=#{u_id}
+   	</select>
+   	
+   	<!-- 医生查看发布记录 -->
+   	<select id="getListByentity" parameterType="title" resultType="title">
+   		select * from title where d_id=#{d_id}
+   	</select>
+   	
+   	<insert id="add" parameterType="title">
+   		insert into title(u_id,d_id,doctorname,title,context,t_date) values(
+   		#{u_id},#{d_id},#{doctorname},#{title},#{context},now()
+   		)
+   	</insert>
+   	
+   	<!-- 删除记录 -->
+   	<delete id="deleteOne" parameterType="int">
+   		delete from title where t_id=#{t_id} 
+   	</delete>
+</mapper>

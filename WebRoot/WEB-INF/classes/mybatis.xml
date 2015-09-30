@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!--  配置别名-->
+	<typeAliases>
+	   		<typeAlias type="com.tg.entity.test" alias="test"></typeAlias>
+	   		<typeAlias type="com.tg.entity.Addall" alias="addall"></typeAlias>
+	   		<typeAlias type="com.tg.entity.Diagnose" alias="diagnose"></typeAlias>
+	   		<typeAlias type="com.tg.entity.Doctor" alias="doctor"></typeAlias>
+	   		<typeAlias type="com.tg.entity.Monitoring" alias="monitoring"></typeAlias>
+	   		<typeAlias type="com.tg.entity.Report" alias="report"></typeAlias>
+	   		<typeAlias type="com.tg.entity.User" alias="user"></typeAlias>
+	   		<typeAlias type="com.tg.entity.Title" alias="title"></typeAlias>
+	   		
+	   		<typeAlias type="com.tg.entity.add.ShowBaojingDate" alias="showBaojingDate"></typeAlias>
+	   		<typeAlias type="com.tg.entity.add.ShowBingliDate" alias="showBingliDate"></typeAlias>
+	</typeAliases>
+</configuration>

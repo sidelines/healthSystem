@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tg.entity.add.ShowBingliDate">
+
+	<select id="getListByValue" resultType="showBingliDate" parameterType="showBingliDate">
+		select warning,u_name,u_age,u_sex,diagnose.dia_id,diagnose.d_id,
+		diagnose.u_id,diagnose.m_id,cond,state,report_name,report,d_date 
+		from user,diagnose,monitoring where diagnose.u_id=user.u_id and 
+		diagnose.m_id=monitoring.m_id and warning =2 and diagnose.d_id=#{d_id} ;
+	</select>
+	
+	<select id="getListByentity" resultType="showBingliDate" parameterType="showBingliDate">
+		select warning,u_name,u_age,u_sex,diagnose.dia_id,diagnose.d_id,
+		diagnose.u_id,diagnose.m_id,cond,state,report_name,report,d_date 
+		from user,diagnose,monitoring where diagnose.u_id=user.u_id and 
+		diagnose.m_id=monitoring.m_id and warning =2 and diagnose.u_id=#{u_id} ;
+	</select>
+	
+</mapper>

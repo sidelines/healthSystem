@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>信息管理系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="scripts/jquery/jquery-1.7.1.js"></script>
+<link href="style/authority/basic_layout.css" rel="stylesheet" type="text/css">
+<link href="style/authority/common_style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="scripts/authority/commonAll.js"></script>
+<script type="text/javascript" src="scripts/jquery/jquery-1.4.4.min.js"></script>
+<script src="scripts/My97DatePicker/WdatePicker.js" type="text/javascript" defer="defer"></script>
+<script type="text/javascript" src="scripts/artDialog/artDialog.js?skin=default"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		/*
+		 * 提交
+		 */
+		$("#submitbutton").click(function() {
+			if(validateForm()){
+				checkFyFhSubmit();
+			}
+		});
+		
+		/*
+		 * 取消
+		 */
+		$("#cancelbutton").click(function() {
+			/**  关闭弹出iframe  **/
+			window.parent.$.fancybox.close();
+		});
+		
+		var result = 'null';
+		if(result =='success'){
+			/**  关闭弹出iframe  **/
+			window.parent.$.fancybox.close();
+		}
+	});
+	
+	/** 检测房源房号是否存在  **/
+	function checkFyFh(){
+		// 分别获取小区编号、栋号、层号、房号
+		var fyID = $('#fyID').val();
+		var fyXqCode = $("#fyXq").val();
+		var fyDh = $("#fyDh").val();
+		var fyCh = $("#fyCh").val();	
+		var fyFh = $("#fyFh").val();
+		if(fyXqCode!="" && fyDh!="" && fyCh!="" && fyFh!=""){
+			// 给房屋坐落地址赋值
+			$("#fyZldz").val($('#fyDh option:selected').text() + fyCh + "-" + fyFh);
+			// 异步判断该房室是否存在，如果已存在，给用户已提示哦
+			$.ajax({
+				type:"POST",
+				url:"checkFyFhIsExists.action",
+				data:{"fangyuanEntity.fyID":fyID,"fangyuanEntity.fyXqCode":fyXqCode, "fangyuanEntity.fyDhCode":fyDh, "fangyuanEntity.fyCh":fyCh, "fangyuanEntity.fyFh":fyFh},
+				dataType : "text",
+				success:function(data){
+// 					alert(data);
+					// 如果返回数据不为空，更改“房源信息”
+					if(data=="1"){
+						 art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'该房室在系统中已经存在哦，\n请维护其他房室数据', ok:true,});
+						 $("#fyFh").css("background", "#EEE");
+						 $("#fyFh").focus();
+						 return false;
+					}
+				}
+			});
+		}
+	}
+	
+	/** 检测房源房号是否存在并提交form  **/
+	function checkFyFhSubmit(){
+		// 分别获取小区编号、栋号、层号、房号
+		var fyID = $('#fyID').val();
+		var fyXqCode = $("#fyXq").val();
+		var fyDh = $("#fyDh").val();
+		var fyCh = $("#fyCh").val();	
+		var fyFh = $("#fyFh").val();
+		if(fyXqCode!="" && fyDh!="" && fyCh!="" && fyFh!=""){
+			// 给房屋坐落地址赋值
+			$("#fyZldz").val($('#fyDh option:selected').text()  + fyCh + "-" + fyFh);
+			// 异步判断该房室是否存在，如果已存在，给用户已提示哦
+			$.ajax({
+				type:"POST",
+				url:"checkFyFhIsExists.action",
+				data:{"fangyuanEntity.fyID":fyID,"fangyuanEntity.fyXqCode":fyXqCode, "fangyuanEntity.fyDhCode":fyDh, "fangyuanEntity.fyCh":fyCh, "fangyuanEntity.fyFh":fyFh},
+				dataType : "text",
+				success:function(data){
+// 					alert(data);
+					// 如果返回数据不为空，更改“房源信息”
+					if(data=="1"){
+						 art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'该房室在系统中已经存在哦，\n请维护其他房室数据', ok:true,});
+						 $("#fyFh").css("background", "#EEE");
+						 $("#fyFh").focus();
+						 return false;
+					}else{
+						$("#submitForm").attr("action", "/xngzf/archives/saveOrUpdateFangyuan.action").submit();
+					}
+				}
+			});
+		}
+		return true;
+	}
+	
+	/** 表单验证  **/
+	function validateForm(){
+		if($("#fyXqName").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源小区', ok:true,});
+			return false;
+		}
+		if($("#fyDh").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源栋号', ok:true,});
+			return false;
+		}
+		if($("#fyCh").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源层号', ok:true,});
+			return false;
+		}
+		if($("#fyFh").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源房号', ok:true,});
+			return false;
+		}
+		if($("#fyZongMj").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源面积', ok:true,});
+			return false;
+		}
+		if($("#fyJizuMj").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写计租面积', ok:true,});
+			return false;
+		}
+		if($("#fyZldz").val()==""){
+			art.dialog({icon:'error', title:'友情提示', drag:false, resize:false, content:'填写房源座落地址', ok:true,});
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+<form id="submitForm" name="submitForm" action="/xngzf/archives/initFangyuan.action" method="post">
+	<input type="hidden" name="fyID" value="14458625716623" id="fyID"/>
+	<div id="container">
+		<div id="nav_links">
+			当前位置：健康报告&nbsp;>&nbsp;<span style="color: #1A5CC6;">报告查看</span>
+			<div id="page_close">
+				<a href="javascript:parent.$.fancybox.close();">
+					<img src="images/common/page_close.png" width="20" height="20" style="vertical-align: text-top;"/>
+				</a>
+			</div>
+		</div>
+		<div class="ui_content">
+			<p>
+            高血压
+锁定
+本词条由国家卫生计生委临床医生科普项目/百科名医网提供内容并参与编辑。
+正常人的血压随内外环境变化在一定范围内波动。在整体人群，血压水平随年龄逐渐升高，以收缩压更为明显，但50岁后舒张压呈现下降趋势，脉压也随之加大。近年来，人们对心血管病多重危险因素作用以及心、脑、肾靶器官保护的认识不断深入，高血压的诊断标准也在不断调整，目前认为同一血压水平的患者发生心血管病的危险不同，因此有了血压分层的概念，即发生心血管病危险度不同的患者，适宜血压水平应有不同。医生面对患者时在参考标准的基础上，根据其具体情况判断该患者最合适的血压范围，采用针对性的治疗措施。
+英文名称 hypertention
+就诊科室 内科，心血管内科
+常见病因 遗传，环境，年龄，肥胖等
+传染性 无 专家解读
+专家图片
+为什么要坚持长期控制血压
+高血压治疗目的是降低心脑血管疾病发生，这需要同时控制血脂、血糖等危险因...
+疾病概况
+科普文章(6)
+科普视频
+目录
+1病因
+2分类
+3临床表现
+4诊断
+5治疗
+6子词条
+病因
+
+1.习惯因素遗传
+大约半数高血压患者有家族史。
+2.环境因素
+3.年龄
+发病率着随年龄增长而增高的趋势，40岁以上者发病率高。
+4.其他
+肥胖者发病率高；避孕药；睡眠呼吸暂停低通气综合征。
+分类
+
+临床上高血压可分为两类：
+1.原发性高血压
+是一种以血压升高为主要临床表现而病因尚未明确的独立疾病。
+2.继发性高血压
+又称为症状性高血压，在这类疾病中病因明确，高血压仅是该种疾病的临床表现之一，血压可暂时性或持久性升高。
+临床表现
+
+高血压的症状因人而异。早期可能无症状或症状不明显，仅仅会在劳累、精神紧张、情绪波动后发生血压升高，并在休息后恢复正常。随着病程延长，血压明显的持续升高，逐渐会出现各种症状。此时被称为缓进型高血压病。缓进型高血压病常见的临床症状有头痛、头晕、注意力不集中、记忆力减退、肢体麻木、夜尿增多、心悸、胸闷、乏力等。当血压突然升高到一定程度时甚至会出现剧烈头痛、呕吐、心悸、眩晕等症状，严重时会发生神志不清、抽搐。这就属于急进型高血压和高血压危重症，多会在短期内发生严重的心、脑、肾等器官的损害和病变，如中风、心梗、肾衰等。症状与血压升高的水平并无一致的关系。
+诊断
+
+目前国内高血压的诊断采用2000年中国高血压治疗指南建议的标准：
+类别
+收缩压（mmHg）
+舒张压（mmHg）
+正常血压
+
+1.治疗目的及原则
+降压治疗的最终目的是减少高血压患者心、脑血管病的发生率和死亡率。降压治疗应该确立血压控制目标值。另一方面，高血压常常与其他心、脑血管病的危险因素合并存在，例如高胆固醇血症、肥胖、糖尿病等，协同加重心血管疾病危险，治疗措施应该是综合性的。
+（1）改善生活行为①减轻体重。②减少钠盐摄入。③补充钙和钾盐。④减少脂肪摄入。⑤增加运动。⑥戒烟、限制饮酒。
+（2）血压控制标准个体化由于病因不同，高血压发病机制不尽相同，临床用药分别对待，选择最合适药物和剂量，以获得最佳疗效。
+（3）多重心血管危险因素协同控制降压治疗后尽管血压控制在正常范围，血压升高以外的多种危险因素依然对预后产生重要影响。
+2.降压药物治疗
+（1）降压药物种类①利尿药。②β受体阻滞剂。③钙通道阻滞剂。④血管紧张素转换酶抑制剂。⑤血管紧张素II受体阻滞剂。
+（2）治疗方案大多数无并发症或合并症患者可以单独或者联合使用噻嗪类利尿剂、β受体阻滞剂等。治疗应从小剂量开始，逐步递增剂量。临床实际使用时，患者心血管危险因素状况、靶器官损害、并发症、合并症、降压疗效、不良反应等，都会影响降压药的选择。2级高血压患者在开始时就可以采用两种降压药物联合治疗。
+子词条
+
+1.原发性高血压
+2.继发性高血压
+3.肾血管性高血压
+4.白大衣高血压
+5.妊娠高血压疾病
+            </p>
+		</div>
+	</div>
+</form>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+/*! http://responsiveslides.com v1.53 by @viljamis */
+
+.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+ 	display: block;
+	height: auto;
+	float: left;
+	border: 0;
+	width: 100%;
+  }
+.slider-info {
+	position: absolute;
+	top: 120px;
+	left: 9%;
+	text-align: right;
+	-webkit-transition: background 0.2s ease;
+	-moz-transition: background 0.2s ease;
+	-o-transition: background 0.2s ease;
+	-ms-transition: background 0.2s ease;
+	transition: background 0.2s ease;
+	border-radius: 0.3em;
+	width: 50%;
+}
+.slider-info p{
+font-family: 'Open Sans', sans-serif;
+	color: #007DAD;
+	font-size:4.5em;
+	text-transform: uppercase;
+}
+#p1{
+font-family: 'Open Sans', sans-serif;
+color: #007DAD;
+font-size:4em;
+}
+.slider-info span{
+	font-family: 'Open Sans', sans-serif;
+	width: 89%;
+	color: rgba(31, 31, 31, 0.99);
+	font-size: 1.175em;
+	text-transform: uppercase;
+	display: block;
+	left: 11%;
+	position: absolute;
+	-webkit-transition: background 0.2s ease;
+	-moz-transition: background 0.2s ease;
+	-o-transition: background 0.2s ease;
+	-ms-transition: background 0.2s ease;
+	transition: background 0.2s ease;
+	padding: 0.6em 0;
+}
+.slider-info a{
+	font-family: 'Open Sans', sans-serif;
+	background:#289cd8;
+	color: #FFF;
+	padding: 15px 40px;
+	font-size: 0.875em;
+	text-transform: uppercase;
+	display: block;
+	left: 80%;
+	position: absolute;
+	top: 133%;
+	transition: 0.5s ease;
+	-o-transition: 0.5s ease;
+	-webkit-transition: 0.5s ease;
+	-webkit-transition: background 0.2s ease;
+    -moz-transition: background 0.2s ease;
+    -o-transition: background 0.2s ease;
+    -ms-transition: background 0.2s ease;
+    transition: background 0.2s ease;
+}
+.slider-info a:hover{
+	background: rgba(31, 31, 31, 0.99);
+	color:#FFF;
+}
+@media only screen and (max-width: 1366px) and (min-width: 1280px) {
+	.slider-info {
+		left: 7%;
+	}
+	.slider-info p {
+		font-size: 4em;
+	}
+}
+@media only screen and (max-width: 1280px) and (min-width: 1024px) {
+	.slider-info {
+		left: 8%;
+		top: 80px;
+	}
+	.slider-info p {
+		font-size: 4em;
+	}
+	.slider-info a {
+		left: 74%;
+	}
+}
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+	.slider-info {
+		top: 82px;
+		left: 2%;
+	}
+}
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+	.slider-info {
+		top: 28px;
+		left: 6%;
+	}
+	.slider-info p {
+		font-size: 3em;
+	}
+	.slider-info span {
+		width: 90%;
+		margin:0 auto;
+	}
+	.slider-info a {
+		top: 160%;
+		left: 69%;
+	}
+
+}
+@media only screen and (max-width: 768px) and (min-width: 640px) {
+	.slider-info {
+		top: 15px;
+		left: 5%;
+	}
+	.slider-info p {
+		font-size: 2em;
+	}
+	.slider-info span {
+		width: 90%;
+		margin:0 auto;
+	}
+	.slider-info a {
+		top: 207%;
+		left: 69%;
+	}
+	.slider-info a {
+		padding: 11px 20px;
+	}
+	
+	
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tg.entity.add.ShowBaojingDate">
+
+	<select id="getListByentity" resultType="showBaojingDate" parameterType="showBaojingDate">
+		 select monitoring.u_id,monitoring.d_id,monitoring.m_id,u_name,u_age,u_sex,highpressure,lowpressure,temperature,
+		 pulse,ecg,m_date from user,monitoring where user.u_id=monitoring.u_id 
+		 and monitoring.d_id=#{d_id} and warning=1; 
+	</select>
+	
+		<select id="getListByValue" resultType="showBaojingDate" parameterType="showBaojingDate">
+		 select monitoring.u_id,monitoring.d_id,monitoring.m_id,u_name,u_age,u_sex,highpressure,lowpressure,temperature,
+		 pulse,ecg,m_date from user,monitoring where user.u_id=monitoring.u_id 
+		 and monitoring.d_id=#{d_id} and warning=0; 
+	</select>
+</mapper>

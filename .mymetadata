@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="healthSystem"
+  id="myeclipse.1417367465094"
+  context-root="/healthSystem"
+  j2ee-spec="6.0"
+  archive="healthSystem.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

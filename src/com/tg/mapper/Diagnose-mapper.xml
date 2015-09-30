@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tg.entity.Diagnose">
+    <!-- 插入操作 -->
+	<insert id="add" parameterType="diagnose">
+	   insert into diagnose(d_id,u_id,m_id,cond,state,report_name,report,d_date)
+	    values(#{d_id},#{u_id},#{m_id},#{condition},#{state},#{reportname},#{report},now())
+	    
+	</insert>
+	
+	<!-- 删除操作 -->
+	<delete id="deleteOne" parameterType="int">
+		delete from diagnose where dia_id=#{dia_id}
+	</delete>
+	
+	<!-- 删除操作 -->
+	<delete id="deleteAll" parameterType="int">
+		delete from diagnose where dia_id=#{dia_id}
+	</delete>
+</mapper>

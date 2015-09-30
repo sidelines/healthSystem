@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"     
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tg.entity.User">
+	<!--  查询操作-->
+	<select id="findOne" parameterType="user" resultType="user">
+	  select * from user where u_username=#{u_username}
+	</select>
+	
+	<!--  查询用户信息-->
+	<select id="getListByentity" parameterType="user" resultType="user">
+	  select * from user where u_id=#{u_id}
+	</select>
+	
+	<select id="logincheck" parameterType="user" resultType="int">
+		select count(*)  from user where u_username=#{u_username} and u_password=#{u_password}
+	</select>
+	
+	<select id="ajaxSign" parameterType="user" resultType="int">
+		select count(*)  from user where u_username=#{u_username}
+	</select>
+	
+	<insert id="add" parameterType="user">
+		insert into user(u_name,u_age,u_sex,u_username,u_password) values(#{u_name},#{u_age},#{u_sex},#{u_username},#{u_password})
+	</insert>
+</mapper>
